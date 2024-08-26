@@ -62,6 +62,7 @@ import "C"
 import (
 	"fmt"
 	"os"
+	"runtime"
 	"strconv"
 	"unsafe"
 )
@@ -69,6 +70,12 @@ import (
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: go run main.go <pid>")
+		return
+	}
+
+	// Validate if the program is executed in Linux system using Go
+	if runtime.GOOS != "linux" {
+		fmt.Println("This program only works on Linux systems.")
 		return
 	}
 
